@@ -6,7 +6,7 @@
 
     <footer id="colophon" class="site-footer bg-black border-t border-white/10 py-12">
         <div class="cemetery-divider" 
-            style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/img/cemetery.png');">
+            style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/img/spooky-grave.png');">
         </div>
         <div class="container mx-auto px-4">
             
