@@ -13,7 +13,7 @@ registerBlockType(metadata.name, {
             <div {...blockProps}>
                 <RichText
                     tagName="h2"
-                    className="font-display text-2xl font-bold text-ghost mb-4"
+                    className="font-display text-2xl font-bold text-void mb-4"
                     value={attributes.title}
                     onChange={(val) => setAttributes({ title: val })}
                     placeholder="Spooky Title..."
@@ -36,7 +36,7 @@ registerBlockType(metadata.name, {
             <div {...blockProps}>
                 <RichText.Content
                     tagName="h2"
-                    className="font-display text-2xl font-bold text-ghost mb-4"
+                    className="font-display text-2xl font-bold text-void mb-4"
                     value={attributes.title}
                 />
                 <div className="flex-1">

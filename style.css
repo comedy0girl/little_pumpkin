@@ -408,14 +408,14 @@
       color: color-mix(in oklab, var(--color-aged-bone) 40%, transparent);
     }
   }
-  .text-ghost {
-    color: var(--color-ghost);
-  }
   .text-gray-300 {
     color: var(--color-gray-300);
   }
   .text-pumpkin {
     color: var(--color-pumpkin);
+  }
+  .text-void {
+    color: var(--color-void);
   }
   .text-white {
     color: var(--color-white);
@@ -988,14 +988,6 @@ header {
 }
 .wp-block-gallery .wp-block-image:hover {
   transform: rotate(-2deg) scale(1.05);
-}
-.wp-block-image img {
-  filter: sepia(0.8) contrast(1.2);
-  transition: filter 0.4s;
-  cursor: zoom-in;
-}
-.wp-block-image img:hover {
-  filter: sepia(0) contrast(1);
 }
 #halloween-lightbox {
   position: fixed;
