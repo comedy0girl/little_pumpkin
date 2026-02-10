@@ -46,7 +46,7 @@ header {
     }
 
     #primary-menu > li > a {
-        @apply font-semibold text-ghost transition-all duration-200 outline-none px-3 py-1;
+        @apply font-semibold text-ghost transition-all duration-200 px-3 py-1;
         text-decoration: none !important;
     }
     #primary-menu li.menu-item-has-children:hover > a::after {
@@ -75,7 +75,7 @@ header {
     }
 
     #primary-menu .sub-menu li a {
-        @apply block px-4 py-2 text-sm text-ghost transition-colors duration-200 outline-none rounded-md;
+        @apply block px-4 py-2 text-sm text-ghost transition-colors duration-200 rounded-md;
         text-decoration: none !important;
     }
     
@@ -85,6 +85,32 @@ header {
         color: var(--color-void) !important; 
         font-weight: 700 !important;
         text-decoration: none !important;
+    }
+
+    @media (min-width: 768px) {
+        #primary-menu .sub-menu {
+            @apply absolute top-full w-48 bg-void border border-white/10 
+                shadow-xl opacity-0 invisible translate-y-2 
+                z-50 p-2 pointer-events-none;
+            
+            left: 0; 
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.1s;
+        }
+        #primary-menu > li:last-child .sub-menu,
+        #primary-menu > li:nth-last-child(2) .sub-menu {
+            left: auto;
+            right: 0;
+        }
+        #primary-menu > li:last-child .sub-menu .sub-menu,
+        #primary-menu > li:nth-last-child(2) .sub-menu .sub-menu {
+            left: auto;
+            right: 100%;
+        }
+
+        #primary-menu li:hover > .sub-menu,
+        #primary-menu li:focus-within > .sub-menu {
+            @apply opacity-100 visible translate-y-0 pointer-events-auto;
+        }
     }
 }
 
@@ -140,20 +166,20 @@ header {
     }
 
     #site-navigation::after {
-    content: "";
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
-    width: 180px;
-    height: 180px;
-    background-image: url('assets/img/ghost.png'); 
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.1; 
-    pointer-events: none; 
-    z-index: -1; 
-    animation: ghostFloat 5s ease-in-out infinite;
-}
+        content: "";
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+        width: 180px;
+        height: 180px;
+        background-image: url('assets/img/ghost.png'); 
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.1; 
+        pointer-events: none; 
+        z-index: -1; 
+        animation: ghostFloat 5s ease-in-out infinite;
+    }
 }
 
 /* --- Global States & Toggle --- */

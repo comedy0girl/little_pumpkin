@@ -19,16 +19,6 @@
     transform: rotate(-2deg) scale(1.05);
 }
 
-/* .wp-block-image img {
-    filter: sepia(0.8) contrast(1.2);
-    transition: filter 0.4s;
-    cursor: zoom-in; 
-}
-
-.wp-block-image img:hover {
-    filter: sepia(0) contrast(1);
-} */
-
 /* --- Lightbox Overlay --- */
 #halloween-lightbox {
     position: fixed;

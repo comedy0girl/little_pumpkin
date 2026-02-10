@@ -7,11 +7,14 @@ function my_pumpkin_setup() {
     add_theme_support( 'custom-logo' );
     add_theme_support( 'align-wide' );
     add_theme_support( 'post-thumbnails' );
+    
+    // Add custom gallery image size for Halloween Mode
+    add_image_size( 'gallery', 175, 175, true ); 
+
     add_theme_support( 'editor-styles' );
     add_editor_style( 'style.css' );
-    add_theme_support( 'align-wide' );
 
-    // Custom Logo
+    // Custom Logo (Note: consolidated your two custom-logo calls into one)
     add_theme_support('custom-logo', array(
         'height'               => 100,
         'width'                => 400,

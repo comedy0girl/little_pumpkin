@@ -787,8 +787,6 @@ header {
     transition-duration: var(--tw-duration, var(--default-transition-duration));
     --tw-duration: 200ms;
     transition-duration: 200ms;
-    --tw-outline-style: none;
-    outline-style: none;
     text-decoration: none !important;
   }
   #primary-menu li.menu-item-has-children:hover > a::after {
@@ -843,8 +841,6 @@ header {
     transition-duration: var(--tw-duration, var(--default-transition-duration));
     --tw-duration: 200ms;
     transition-duration: 200ms;
-    --tw-outline-style: none;
-    outline-style: none;
     text-decoration: none !important;
   }
   #primary-menu .sub-menu li a:hover, #primary-menu .sub-menu li a:focus {
@@ -852,6 +848,46 @@ header {
     color: var(--color-void) !important;
     font-weight: 700 !important;
     text-decoration: none !important;
+  }
+  @media (min-width: 768px) {
+    #primary-menu .sub-menu {
+      pointer-events: none;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      z-index: 50;
+      width: calc(var(--spacing) * 48);
+      --tw-translate-y: calc(var(--spacing) * 2);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: color-mix(in srgb, #fff 10%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+      }
+      background-color: var(--color-void);
+      padding: calc(var(--spacing) * 2);
+      opacity: 0%;
+      --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      left: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.1s;
+    }
+    #primary-menu > li:last-child .sub-menu, #primary-menu > li:nth-last-child(2) .sub-menu {
+      left: auto;
+      right: 0;
+    }
+    #primary-menu > li:last-child .sub-menu .sub-menu, #primary-menu > li:nth-last-child(2) .sub-menu .sub-menu {
+      left: auto;
+      right: 100%;
+    }
+    #primary-menu li:hover > .sub-menu, #primary-menu li:focus-within > .sub-menu {
+      pointer-events: auto;
+      visibility: visible;
+      --tw-translate-y: calc(var(--spacing) * 0);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+      opacity: 100%;
+    }
   }
 }
 @media (max-width: 767px) {

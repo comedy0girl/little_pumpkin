@@ -4,8 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('#site-navigation');
     if (!toggle || !nav) return;
 
-    const navLinks = Array.from(nav.querySelectorAll('a'));
+    // --- Mobile Sub-menu (Candy) Logic ---
+    const parentLinks = nav.querySelectorAll('.menu-item-has-children > a');
 
+    parentLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+
+            if (window.innerWidth < 768) {
+                const parentLi = link.parentElement;
+                if (!parentLi.classList.contains('is-open')) {
+                    e.preventDefault();
+                    parentLi.classList.add('is-open');
+                } 
+            }
+        });
+    });
+
+    // --- Main Hamburger Toggle Logic ---
     const toggleMenu = (forceState) => {
         const isCurrentlyActive = nav.classList.contains('is-active');
         const shouldOpen = (typeof forceState === 'boolean') ? forceState : !isCurrentlyActive;
@@ -16,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (shouldOpen) {
             document.body.classList.add('has-menu-open');
         } else {
+            // Close all sub-menus when closing the main menu
+            nav.querySelectorAll('.is-open').forEach(el => el.classList.remove('is-open'));
+            
             if (!document.querySelector('#halloween-lightbox.is-active')) {
                 document.body.classList.remove('has-menu-open');
             }
@@ -29,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMenu();
     });
 
+    // --- Lightbox Logic ---
     const lightbox = document.createElement('div');
     lightbox.id = 'halloween-lightbox';
     
@@ -45,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const img = document.createElement('img');
             img.src = image.src;
             
-            // Clear previous and add new
             const currentImg = lightbox.querySelector('img');
             if (currentImg) currentImg.remove();
             
@@ -54,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close logic for Lightbox
     lightbox.addEventListener('click', (e) => {
         if (e.target.id === 'halloween-lightbox' || e.target.id === 'lightbox-close') {
             lightbox.classList.remove('is-active');
@@ -64,11 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Global Escape Key to close everything
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             toggleMenu(false);
-            lightbox.classList.remove('is-active');
+            if (lightbox) lightbox.classList.remove('is-active');
             document.body.classList.remove('has-menu-open');
         }
     });
