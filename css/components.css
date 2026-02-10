@@ -1,0 +1,53 @@
+@layer components {
+  .btn-spooky {
+    @apply bg-pumpkin text-black px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors;
+  }
+}
+.wp-block-buttons {
+  margin-top: 1rem;
+}
+@layer components {
+    .wp-block-button__link, 
+    .btn-beistle {
+        background-color: var(--color-beistle-purple) !important;
+        color: var(--color-ghost) !important;
+        @apply font-display uppercase tracking-widest px-6 py-3 rounded-none; 
+    }
+    .wp-block-button__link:hover {
+        background-color: var(--color-beistle-purple-dark) !important;
+        transform: translate(-2px, -2px);
+        filter: drop-shadow(7px 7px 0px #000);
+    }
+    .wp-block-button__link:focus-visible {
+        outline: 3px solid var(--color-ghost) !important;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 6px var(--color-beistle-purple) !important;
+    }
+}
+
+/* --- Hand-Torn Construction Paper Edge --- */
+.hero-textured {
+    background-color: var(--color-bleak);
+    position: relative;
+    border-bottom: 5px solid black;
+    clip-path: polygon(
+        0% 0%, 100% 0%, 100% 92%, 
+        97% 94%, 94% 91%, 90% 95%, 85% 92%, 80% 96%, 
+        75% 91%, 70% 94%, 65% 92%, 60% 95%, 55% 91%, 
+        50% 96%, 45% 93%, 40% 95%, 35% 91%, 30% 96%, 
+        25% 92%, 20% 95%, 15% 91%, 10% 96%, 5% 92%, 0% 95%
+    );
+    padding-bottom: 120px !important;
+}
+
+.hero-textured::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 2;
+    clip-path: inherit; 
+    background-color: transparent !important; 
+}

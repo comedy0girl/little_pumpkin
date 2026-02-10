@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@source "./blocks/**/*.php";
+
+/* Breakout files */
+@import "./css/settings.css";
+@import "./css/header.css";
+@import "./css/footer.css";
+@import "./css/components.css";
+@import "./css/animations.css";
+@import "./css/navigation.css";
+@import "./css/gallery.css";
+@import "./css/cards.css";

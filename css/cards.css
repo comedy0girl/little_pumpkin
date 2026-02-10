@@ -1,0 +1,42 @@
+
+/* ==========================================================================
+   Spooky Cards
+   ========================================================================== */
+
+.beistle-card {
+    border: 3px solid #000;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background: var(--color-bleak);
+}
+
+.beistle-card:hover {
+    transform: translate(-2px, -2px);
+    filter: drop-shadow(10px 10px 0px #000);
+}
+
+.reveal-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease-out !important;
+    max-width: 100%; 
+}
+
+/* --- Desktop Only: The Side-Slide --- */
+@media (min-width: 768px) {
+    .reveal-on-scroll:nth-child(odd) { transform: translateX(-50px); }
+    .reveal-on-scroll:nth-child(even) { transform: translateX(50px); }
+}
+
+/* ---  Mobile Only: Vertical Slide --- */
+@media (max-width: 767px) {
+    .reveal-on-scroll { 
+        transform: translateY(20px); 
+    }
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(0, 0) !important;
+}

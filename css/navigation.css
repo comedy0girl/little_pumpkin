@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Navigation - Halloween Mode
+   ========================================================================== */
+
+body.has-menu-open {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+}
+.site-logo img {
+    @apply h-12 w-auto max-w-none transition-transform hover:scale-110;
+} 
+
+header {
+    position: relative; 
+    min-height: 80px;  
+    display: flex;
+    align-items: center;
+}
+
+/* --- Global Spinning Candy Logic --- */
+.menu-item-has-children > a {
+    display: inline-flex !important;
+    align-items: center;
+}
+
+.menu-item-has-children > a::after {
+    content: '🍬' !important;
+    display: inline-block !important;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none !important;
+    line-height: 1;
+    filter: saturate(0.8) brightness(1.1);
+}
+
+/* --- Desktop Navigation (768px+) --- */
+@media (min-width: 768px) {
+    #primary-menu {
+        @apply flex items-center gap-8;
+    }
+
+    #primary-menu li {
+        @apply relative py-2; 
+    }
+
+    #primary-menu > li > a {
+        @apply font-semibold text-ghost transition-all duration-200 outline-none px-3 py-1;
+        text-decoration: none !important;
+    }
+    #primary-menu li.menu-item-has-children:hover > a::after {
+        transform: rotate(360deg) scale(1.2);
+    }
+
+    #primary-menu li:hover > a,
+    #primary-menu li:focus-within > a, 
+    #primary-menu li.current-menu-parent > a {
+        text-decoration: underline !important;
+        text-decoration-color: var(--color-pumpkin);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 6px;
+    }
+
+    #primary-menu .sub-menu {
+        @apply absolute left-0 top-full w-48 bg-void border border-white/10 
+                shadow-xl opacity-0 invisible translate-y-2 
+                z-50 p-2 pointer-events-none;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.1s;
+    }
+
+    #primary-menu li:hover > .sub-menu,
+    #primary-menu li:focus-within > .sub-menu {
+        @apply opacity-100 visible translate-y-0 pointer-events-auto;
+    }
+
+    #primary-menu .sub-menu li a {
+        @apply block px-4 py-2 text-sm text-ghost transition-colors duration-200 outline-none rounded-md;
+        text-decoration: none !important;
+    }
+    
+    #primary-menu .sub-menu li a:hover,
+    #primary-menu .sub-menu li a:focus {
+        background-color: var(--color-pumpkin) !important;
+        color: var(--color-void) !important; 
+        font-weight: 700 !important;
+        text-decoration: none !important;
+    }
+}
+
+/* --- Mobile Menu Overlay (Below 768px) --- */
+@media (max-width: 767px) {
+    #site-navigation {
+        @apply fixed top-0 left-0 w-full h-screen flex flex-col 
+                items-start justify-start z-40 pt-32 overflow-y-auto;
+        background: linear-gradient(to bottom, rgba(40, 40, 40, 0.98) 0%, var(--color-void) 150px, var(--color-void) 100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: all 0.5s ease;
+    }
+
+    #site-navigation.is-active {
+        @apply opacity-100 visible pointer-events-auto;
+    }
+
+    #site-navigation ul#primary-menu {
+        @apply flex flex-col items-start justify-start gap-2 w-full px-12;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    #site-navigation ul li {
+        @apply w-full border-b border-white/5;
+    }
+
+    #site-navigation ul li a {
+        @apply text-2xl text-ghost no-underline py-3 flex items-center justify-between transition-colors w-full;
+        font-weight: 700;
+    }
+
+    #site-navigation ul .sub-menu {
+        display: none; 
+        position: static;
+        width: 100%;
+        padding-left: 1.5rem;
+        margin-top: 0.5rem;
+        border-left: 2px solid var(--color-pumpkin);
+        @apply flex-col gap-1 mb-4 bg-transparent;
+    }
+
+    #site-navigation ul li.is-open > .sub-menu {
+        display: flex;
+    }
+
+    #site-navigation ul li.is-open > a::after {
+        transform: rotate(360deg) scale(1.3);
+    }
+
+    #site-navigation::after {
+    content: "";
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 180px;
+    height: 180px;
+    background-image: url('assets/img/ghost.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1; 
+    pointer-events: none; 
+    z-index: -1; 
+    animation: ghostFloat 5s ease-in-out infinite;
+}
+}
+
+/* --- Global States & Toggle --- */
+
+/* Current Page State */
+#primary-menu a[aria-current="page"] {
+    color: var(--color-pumpkin) !important;
+    text-decoration: underline !important;
+    text-decoration-color: var(--color-pumpkin);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
+    font-weight: 700;
+}
+
+/* Hamburger Toggle */
+.mobile-menu-toggle {
+    @apply flex flex-col gap-1.5 p-2;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.5rem;
+    z-index: 100; 
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .mobile-menu-toggle { display: none !important; }
+}

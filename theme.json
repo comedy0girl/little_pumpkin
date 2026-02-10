@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "settings": {
+        "appearanceTools": true,
+        "useRootPaddingAwareAlignments": true,
+        "color": {
+            "custom": true,
+            "palette": [
+                {
+                    "slug": "halloween-orange",
+                    "color": "#f97316",
+                    "name": "Halloween Orange"
+                },
+                {
+                    "slug": "halloween-dark",
+                    "color": "#0f172a",
+                    "name": "Halloween Dark"
+                }
+            ]
+        },
+        "layout": {
+            "contentSize": "800px",
+            "wideSize": "1200px"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+/* ==========================================================================
+   HALLOWEEN MODE - THE BEISTLE EDITION (2026)
+   ========================================================================== */
+
+@theme {
+  --color-void: #1a1a1a;    
+  --color-bleak: #0f0e0e;    
+  --color-beistle-purple: #4a266a; 
+  --color-beistle-purple-dark: #311847;
+  
+  /* Primary Action Color */
+  --color-pumpkin: #f26522;      
+  
+  /* Accent Colors */
+  --color-slime: #2c622c;          
+  
+  /* Neutral/Text Colors */
+  --color-aged-bone: #e5d3b3;    
+  --color-ghost: #f8f8ff;        
+  
+  /* Subtle Utility */
+  --color-cursed-gold: #b8860b;  
+
+  /* Breakpoints */
+  --breakpoint-tablet: 640px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-ultrawide: 1920px;
+
+  /* Typography */
+  --font-body: "Inter", sans-serif;
+  --font-display: "Special Elite", system-ui;
+
+  /* Spacing */
+  --spacing-header-height: 80px;
+}
+
+
+html {
+    height: 100%;
+    display: block;
+    scrollbar-gutter: stable;
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    background-color: var(--color-void);
+    color: var(--color-aged-bone);
+    font-family: var(--font-body);
+}
+
+#page {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    overflow: hidden; /* ---  keeping the bats contained! ---- */
+}
+
+#colophon {
+    flex-shrink: 0;
+    margin-top: auto;
+}

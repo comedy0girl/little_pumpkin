@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer .footer-menu a {
+    @apply text-aged-bone/70 transition-all duration-200 px-2 py-1;
+    text-decoration: none !important;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.site-footer .footer-menu a:hover {
+    @apply text-pumpkin;
+}
+.site-footer .footer-menu a[aria-current="page"],
+.site-footer .footer-menu .current-menu-item > a,
+.site-footer .footer-menu .current-menu-parent > a {
+    @apply text-pumpkin;
+    opacity: 1;
+    text-decoration: underline !important;
+    text-decoration-color: var(--color-pumpkin);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+    transition: all 0.2s ease-in-out; 
+}
+
+.site-footer .footer-menu a[aria-current="page"]:hover,
+.site-footer .footer-menu .current-menu-item > a:hover {
+    color: var(--color-ghost) !important;
+    text-decoration-color: var(--color-ghost);
+    text-underline-offset: 6px;
+}
+
+.site-footer .footer-menu a:focus-visible {
+    outline: 3px solid var(--color-pumpkin) !important;
+    outline-offset: 3px;
+    box-shadow: none !important; 
+    @apply text-pumpkin;
+    border-radius: 2px;
+    color: var(--color-ghost) !important;
+}
+
+.footer-widgets h2, 
+.footer-widgets h3 {
+    @apply text-pumpkin uppercase tracking-widest text-xs font-bold mb-4;
+    font-family: var(--font-display); 
+}
+
+/* --- Cemetery Positioning --- */
+.site-footer {
+    position: relative; 
+    overflow: visible !important; 
+}
+
+.cemetery-divider {
+    position: absolute; 
+    top: -91px; 
+    left: 0; 
+    width: 100%; 
+    height: 100px; 
+    z-index: 20;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: auto 100%;
+    pointer-events: none;
+}
