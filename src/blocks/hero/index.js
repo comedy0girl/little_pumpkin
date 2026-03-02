@@ -18,7 +18,7 @@ registerBlockType(metadata.name, {
                     ['core/heading', { 
                         level: 1, 
                         placeholder: 'Spooky Hero Title', 
-                        className: 'text-5xl md:text-7xl font-black uppercase italic leading-none' 
+                        className: 'text-5xl md:text-7xl font-black uppercase italic leading-none beistle-text' 
                     }],
                     ['core/paragraph', { 
                         placeholder: 'Enter your haunting sub-headline here...', 
@@ -50,7 +50,7 @@ registerBlockType(metadata.name, {
     },
     save: () => {
         const blockProps = useBlockProps.save({
-            /* Consistent with edit: No bg-black here either */
+           
             className: 'hero-textured text-white py-20 w-screen relative left-1/2 -translate-x-1/2'
         });
 

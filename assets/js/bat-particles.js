@@ -1,3 +1,4 @@
+p5.disableFriendlyErrors = true;
 let bats = [];
 let batImg;
 

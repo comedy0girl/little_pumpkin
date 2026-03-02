@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Halloween Mode Theme",
   "type": "module",
-  "scripts": {
+ "scripts": {
     "start": "rimraf build && wp-scripts start --webpack-src-dir=src/blocks --output-path=build/blocks",
-    "build": "wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks",
+    "build:blocks": "wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks",
+    "build:js": "wp-scripts build assets/js/main.js --output-path=assets/js/min",
+    "build": "npm run build:blocks && npm run build:js && npx @tailwindcss/cli -i ./src.css -o ./style.css",
     "tailwind": "npx @tailwindcss/cli -i ./src.css -o ./style.css --watch",
     "dev": "npm-run-all --parallel start tailwind"
   },

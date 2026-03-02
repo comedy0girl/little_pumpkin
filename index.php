@@ -4,7 +4,7 @@
  */
 
 get_header(); ?>
-	<main class="container mx-auto px-6 pb-20">
+	<main class="container mx-auto px-6 pb-20" id="main">
 		<?php the_content(); ?>
 	</main>
 <?php

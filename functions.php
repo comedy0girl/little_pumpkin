@@ -7,6 +7,9 @@ function my_pumpkin_setup() {
     add_theme_support( 'custom-logo' );
     add_theme_support( 'align-wide' );
     add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'custom-spacing' );
+    add_theme_support( 'appearance-tools' );
     
     // Add custom gallery image size for Halloween Mode
     add_image_size( 'gallery', 175, 175, true ); 
@@ -49,39 +52,23 @@ add_action('wp_enqueue_scripts', 'halloween_load_fonts');
 function halloween_mode_register_blocks() {
     register_block_type( get_template_directory() . '/build/blocks/cards' );
     register_block_type( get_template_directory() . '/build/blocks/hero' );
+    register_block_type( get_template_directory() . '/build/blocks/redacted-dossier' ); 
+
 }
 add_action( 'init', 'halloween_mode_register_blocks' );
 
-//Frontend Styles & Scripts
+/**
+ * Frontend Styles & Scripts - Halloween Mode Consolidated
+ */
 function my_pumpkin_scripts() {
-    // Styles
+    // 1. Styles
     wp_enqueue_style( 'my-pumpkin-style', get_stylesheet_uri(), array(), '1.1' );
+    wp_enqueue_style('halloween-fonts', 'https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@400;700&display=swap', array(), null);
 
-    // Enqueue Main JS
-    wp_enqueue_script( 
-        'my-pumpkin-main', 
-        get_template_directory_uri() . '/assets/js/main.js', 
-        array(), 
-        time(), 
-        true 
-    );
-}
-add_action( 'wp_enqueue_scripts', 'my_pumpkin_scripts' );
+    // 2. Load p5.js Library FIRST
+    wp_enqueue_script('p5-js', 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js', array(), '1.4.0', true);
 
-function halloween_enqueue_reveal_script() {
-    wp_enqueue_script(
-        'halloween-reveal', 
-        get_template_directory_uri() . '/assets/js/reveal.js', 
-        array(), 
-        time(),
-        true
-    );
-}
-add_action('wp_enqueue_scripts', 'halloween_enqueue_reveal_script');
-
-function halloween_enqueue_bat_particles() {
-    wp_enqueue_script('p5-js', 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js', array(), null, true);
-
+    // 3. Load Bat Particles (Depends on p5-js)
     wp_enqueue_script(
         'halloween-bats', 
         get_template_directory_uri() . '/assets/js/bat-particles.js', 
@@ -90,8 +77,64 @@ function halloween_enqueue_bat_particles() {
         true
     );
     wp_localize_script('halloween-bats', 'halloweenData', array(
-        'batPath' => get_template_directory_uri() . '/assets/img/small-bat.png'
+        'batPath' => get_template_directory_uri() . '/assets/img/small-bat.webp'
     ));
-}
-add_action('wp_enqueue_scripts', 'halloween_enqueue_bat_particles');
 
+    // 4. Load Main Navigation Logic (Now also depends on p5-js to prevent errors)
+    $js_uri  = get_template_directory_uri() . '/assets/js/min/main.js';
+    $js_path = get_template_directory() . '/assets/js/min/main.asset.php';
+
+    if ( file_exists( $js_path ) ) {
+        $assets = include( $js_path );
+        // We add 'p5-js' to this array so it waits for p5
+        $deps = array_merge($assets['dependencies'], array('p5-js'));
+
+        wp_enqueue_script( 
+            'my-pumpkin-main', 
+            $js_uri, 
+            $deps,
+            $assets['version'],  
+            true 
+        );
+    } else {
+        wp_enqueue_script( 
+            'my-pumpkin-main', 
+            get_template_directory_uri() . '/assets/js/main.js', 
+            array('p5-js'), 
+            time(), 
+            true 
+        );
+    }
+}
+// Use ONE action to rule them all
+add_action( 'wp_enqueue_scripts', 'my_pumpkin_scripts' );
+
+
+/**
+ * Register Beistle-style Block Variations
+ */
+function little_pumpkin_register_block_styles() {
+
+    register_block_style(
+        'core/image',
+        array(
+            'name'  => 'rubber-stamp',
+            'label' => __('Rubber Stamp', 'little-pumpkin'),
+        )
+    );    
+    register_block_style(
+        'core/image',
+        array(
+            'name'  => 'grainy',
+            'label' => __('Grainy', 'little-pumpkin'),
+        )
+    );
+    register_block_style(
+        'core/image',
+        array(
+            'name'  => 'light-leak',
+            'label' => __('Light Leak', 'little-pumpkin'),
+        )
+    );
+}
+add_action('init', 'little_pumpkin_register_block_styles');

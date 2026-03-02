@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Navigation - Halloween Mode
+   Navigation - Halloween Mode (Consolidated)
    ========================================================================== */
 
 body.has-menu-open {
@@ -7,6 +7,7 @@ body.has-menu-open {
     position: fixed;
     width: 100%;
 }
+
 .site-logo img {
     @apply h-12 w-auto max-w-none transition-transform hover:scale-110;
 } 
@@ -16,6 +17,7 @@ header {
     min-height: 80px;  
     display: flex;
     align-items: center;
+    z-index: 50; /* Above content, below mobile overlay */
 }
 
 /* --- Global Spinning Candy Logic --- */
@@ -49,6 +51,7 @@ header {
         @apply font-semibold text-ghost transition-all duration-200 px-3 py-1;
         text-decoration: none !important;
     }
+
     #primary-menu li.menu-item-has-children:hover > a::after {
         transform: rotate(360deg) scale(1.2);
     }
@@ -87,30 +90,11 @@ header {
         text-decoration: none !important;
     }
 
-    @media (min-width: 768px) {
-        #primary-menu .sub-menu {
-            @apply absolute top-full w-48 bg-void border border-white/10 
-                shadow-xl opacity-0 invisible translate-y-2 
-                z-50 p-2 pointer-events-none;
-            
-            left: 0; 
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.1s;
-        }
-        #primary-menu > li:last-child .sub-menu,
-        #primary-menu > li:nth-last-child(2) .sub-menu {
-            left: auto;
-            right: 0;
-        }
-        #primary-menu > li:last-child .sub-menu .sub-menu,
-        #primary-menu > li:nth-last-child(2) .sub-menu .sub-menu {
-            left: auto;
-            right: 100%;
-        }
-
-        #primary-menu li:hover > .sub-menu,
-        #primary-menu li:focus-within > .sub-menu {
-            @apply opacity-100 visible translate-y-0 pointer-events-auto;
-        }
+    /* Flip sub-menus on the right side to prevent screen cutoff */
+    #primary-menu > li:last-child .sub-menu,
+    #primary-menu > li:nth-last-child(2) .sub-menu {
+        left: auto;
+        right: 0;
     }
 }
 
@@ -118,22 +102,26 @@ header {
 @media (max-width: 767px) {
     #site-navigation {
         @apply fixed top-0 left-0 w-full h-screen flex flex-col 
-                items-start justify-start z-40 pt-32 overflow-y-auto;
-        background: linear-gradient(to bottom, rgba(40, 40, 40, 0.98) 0%, var(--color-void) 150px, var(--color-void) 100%);
+                items-start justify-start pt-32 overflow-y-auto;
+        /* Using your void color variable with a slight fall-back gradient */
+        background:  var(--color-void);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: all 0.5s ease;
+        transition: all 0.4s ease-in-out;
+        z-index: 9999; /* Higher than p5 bats */
     }
 
     #site-navigation.is-active {
-        @apply opacity-100 visible pointer-events-auto;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        display: flex !important;
     }
 
     #site-navigation ul#primary-menu {
         @apply flex flex-col items-start justify-start gap-2 w-full px-12;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
@@ -165,6 +153,7 @@ header {
         transform: rotate(360deg) scale(1.3);
     }
 
+    /* Floating Ghost Decoration */
     #site-navigation::after {
         content: "";
         position: absolute;
@@ -172,7 +161,7 @@ header {
         right: 5%;
         width: 180px;
         height: 180px;
-        background-image: url('assets/img/ghost.png'); 
+        background-image: url('assets/img/ghost.webp'); 
         background-size: contain;
         background-repeat: no-repeat;
         opacity: 0.1; 
@@ -184,7 +173,18 @@ header {
 
 /* --- Global States & Toggle --- */
 
-/* Current Page State */
+/* Hamburger Toggle Button */
+.mobile-menu-toggle {
+    @apply flex flex-col gap-1.5 p-2;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.5rem;
+    z-index: 10000; /* Must be higher than the #site-navigation overlay */
+    cursor: pointer;
+}
+
+/* Current Page Highlight */
 #primary-menu a[aria-current="page"] {
     color: var(--color-pumpkin) !important;
     text-decoration: underline !important;
@@ -194,15 +194,10 @@ header {
     font-weight: 700;
 }
 
-/* Hamburger Toggle */
-.mobile-menu-toggle {
-    @apply flex flex-col gap-1.5 p-2;
-    position: absolute; 
-    top: 50%;
-    transform: translateY(-50%);
-    right: 1.5rem;
-    z-index: 100; 
-    cursor: pointer;
+/* Simple animation for the ghost */
+@keyframes ghostFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 @media (min-width: 768px) {

@@ -1,0 +1,77 @@
+/* Dossier Container */
+.wp-block-halloween-mode-redacted-dossier {
+    background: #d8cfbc;
+    padding: 3rem;
+    border-left: 20px solid #c4baaa; /* Folder Tab */
+    font-weight: bold;
+    color: #2b2b2b;
+    position: relative;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+    clip-path: polygon(
+    0% 0.5%, 25% 0%, 50% 0.5%, 75% 0%, 100% 0.5%, 
+    99.5% 25%, 100% 50%, 99.5% 75%, 100% 100%, 
+    75% 99.5%, 50% 100%, 25% 99.5%, 0% 100%, 
+    0.5% 75%, 0% 50%, 0.5% 25%
+  );
+  filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.2));
+}
+.wp-block-halloween-mode-redacted-dossier::after {
+    content: 'No. 714-B';
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.4);
+    transform: rotate(-2deg);
+  }
+
+.redacted-text {
+    background-color: #111;
+    color: #111;
+    display: inline;
+    padding: 0 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (hover: hover) {
+    .wp-block-halloween-mode-redacted-dossier:hover .redacted-text {
+        background-color: transparent;
+        color: #111;
+        text-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+}
+
+@media (hover: none), (max-width: 768px) {
+    .redacted-text {
+        background-color: rgba(17, 17, 17, 0.1); 
+        color: #111;
+        border-bottom: 2px solid #111; 
+    }
+}
+
+.dossier-stamp {
+    position: absolute;
+    top:2rem;
+    right: 20px;
+    border: 6px solid #8b0000;
+    border-radius: 4px; 
+    color: #8b0000;
+    padding: 8px 16px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: "Courier New", Courier, monospace;
+    transform: rotate(12deg); 
+    filter: blur(0.4px) contrast(120%) drop-shadow(0 0 1px rgba(139, 0, 0, 0.3));
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.85; 
+    mix-blend-mode: multiply; 
+    pointer-events: none;
+    user-select: none;
+}
+.dossier-text-ghost {
+    position: relative;
+}
+.wp-block-halloween-mode-redacted-dossier:hover .dossier-text-ghost {
+    text-shadow: 2px 2px 0px rgba(0, 0, 255, 0.05); /* Faint blue carbon ghost */
+}

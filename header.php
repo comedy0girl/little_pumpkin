@@ -6,7 +6,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('bg-void text-aged-bone'); ?>>
+<body <?php body_class('bg-void text-ghost'); ?>>
 <?php wp_body_open(); ?>
 
 <header class="border-b border-white/10 py-4 relative"> <a class="skip-link screen-reader-text" href="#main"><?php _e('Skip to content', 'little-pumpkin'); ?></a>
@@ -41,3 +41,13 @@
         </button>
     </div>
 </header>
+
+<svg style="display: none;">
+  <filter id="paper-texture">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+    
+    <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2">
+      <feDistantLight azimuth="45" elevation="60" />
+    </feDiffuseLighting>
+  </filter>
+</svg>

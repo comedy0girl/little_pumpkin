@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .site-footer .footer-menu a {
-    @apply text-aged-bone/70 transition-all duration-200 px-2 py-1;
+    @apply text-ghost transition-all duration-200 px-2 py-1;
     text-decoration: none !important;
     outline: none;
     -webkit-font-smoothing: antialiased;

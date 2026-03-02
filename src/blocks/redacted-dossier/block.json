@@ -1,0 +1,16 @@
+{
+  "apiVersion": 3,
+  "name": "halloween-mode/redacted-dossier",
+  "title": "Classified Dossier",
+  "category": "text",
+  "icon": "hidden",
+  "description": "Reveal hidden secrets on hover.",
+  "attributes": {
+    "subject": { "type": "string", "default": "SUBJECT NAME" },
+    "content": { "type": "string", "default": "This information is restricted." },
+    "stampText": { "type": "string", "default": "TOP SECRET" },
+    "fileNumber": { "type": "number" }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:../../../css/dossier.css"
+}

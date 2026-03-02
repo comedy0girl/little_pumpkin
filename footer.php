@@ -4,9 +4,9 @@
  */
 ?>
 
-    <footer id="colophon" class="site-footer bg-black border-t border-white/10 py-12">
+    <footer id="coffin" class="site-footer bg-black border-t border-white/10 py-12">
         <div class="cemetery-divider" 
-            style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/img/spooky-grave.png');">
+            style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/img/spooky-grave.webp');">
         </div>
         <div class="container mx-auto px-4">
             
@@ -28,7 +28,7 @@
                     ?>
                 </div>
                 
-                <div class="copyright text-aged-bone/40 text-sm tracking-wide">
+                <div class="copyright text-ghost text-sm tracking-wide">
                     <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. 
                     <?php _e('All rights reserved.', 'little-pumpkin'); ?></p>
                 </div>
