@@ -154,7 +154,7 @@ header {
     }
 
     /* Floating Ghost Decoration */
-    #site-navigation::after {
+    #site-navigation::after{
         content: "";
         position: absolute;
         bottom: 5%;
